@@ -10,6 +10,7 @@
 //#include <functional>
 #include <locale>
 #include <list>
+#include "cppprimer_ch9.h"
 
 struct csv_reader: std::ctype<char> {
     csv_reader(): std::ctype<char>(get_table()) {}
@@ -149,5 +150,9 @@ void cppprimer_ch9() {
     std::cout << *itr << std::endl;
      */
 
+
+}
+
+void DataTest::foo() {
 
 }
