@@ -17,9 +17,15 @@ if(Boost_FOUND)
     include_directories(${Boost_INCLUDE_DIRS})
 endif()
 
-set(SOURCE_FILES main.cpp cppprimer_ch8.cpp cppprimer_ch9.cpp cppprimer_ch9.h
-        cppprimer_ch11.cpp cppprimer_ch11.h
-        cppprimer_ch12.cpp cppprimer_ch12.h)
+set(SOURCE_FILES
+        main.cpp
+        #cppprimer_ch8.cpp cppprimer_ch9.cpp cppprimer_ch9.h
+       # cppprimer_ch11.cpp
+        #cppprimer_ch11.h
+        cppprimer_ch12.cpp
+        #cppprimer_ch12.h
+        functions.h cppprimer_ch13.cpp cppprimer_ch13.h vec.h)
+
 add_executable(TestCpp1 ${SOURCE_FILES})
 
 if(Boost_FOUND)

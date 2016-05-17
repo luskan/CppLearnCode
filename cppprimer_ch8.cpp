@@ -7,6 +7,8 @@
 #include <cmath>
 #include <fstream>
 
+#include "functions.h"
+
 void cppprimer_ch8() {
     std::fstream fout("C:\\Users\\marci_000\\ClionProjects\\TestCpp1\\test1.txt", std::fstream::out|std::fstream::app );
     fout.seekp(0, std::ios_base::end);

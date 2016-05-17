@@ -2,15 +2,14 @@
 <module type="CPP_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/cppprimer_ch8.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/cppprimer_ch9.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/main.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/cppprimer_ch9.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/cppprimer_ch12.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/cppprimer_ch12.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/cppprimer_ch11.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/main.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/cppprimer_ch13.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/functions.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/cppprimer_ch12.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/vec.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/cppprimer_ch11.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/cppprimer_ch13.h" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">

@@ -1,8 +1,11 @@
-brb be right back
-k okay?
-y why
-r are
-u you
-pic picture
-thk thanks!
-l8r later
+,USA,EUROPE,ASIA
+HUB1-12000,,,
+Transportation Cost,73,129,141
+Tariffs,5,5,1
+ShippingType,a,b,c
+OtherFees,0.6,0.3,0.8
+HUB2-11000,,,
+Transportation Cost,57,101,57
+Tariffs,7,7,5
+ShippingType,b,b,d
+OtherFees,0.7,0.3,0.6

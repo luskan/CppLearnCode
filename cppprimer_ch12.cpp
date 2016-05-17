@@ -99,7 +99,96 @@ void freeMeDeallocator(int *p) {
     std::cout << "freeMeDeallocator" << std::endl;
 }
 
+template <typename T, size_t N>
+std::string ArrToStr( T (&t)[N] ) {
+    return std::string(std::cbegin(t), std::cend(t));
+}
+
+int main2()
+{
+
+    // std::string str2 = ARR_TO_STR("2+\0+2");
+    std::string str2 = ArrToStr("2+2\0+2");
+    //for (auto c : str2)
+    std::cout << "2+2\0+2" << std::endl;
+    std::cout << str2 << std::endl;
+}
+
+
+struct QueryResult {
+    std::vector<std::pair<int, std::shared_ptr<std::string>>> lines;
+};
+
+class TextQuery {
+    std::vector<std::shared_ptr<std::string>> lines;
+    std::map<std::string, std::set<int>> index;
+public:
+    TextQuery(std::ifstream&& inf) {
+        std::string line;
+        while(std::getline(inf, line)) {
+            lines.push_back(std::make_shared<std::string>(line));
+            std::stringstream str(line);
+            std::string word;
+            while(str >> word) {
+                index[word].insert(lines.size()-1);
+            }
+        }
+    }
+
+    QueryResult query(std::string& s) {
+        QueryResult qr;
+        const auto& lineInd = index[s];
+        for(auto num : lineInd)
+            qr.lines.push_back(std::make_pair(num, lines[num]));
+        return qr;
+    }
+};
+
+std::ostream& print(std::ostream& os, const QueryResult& res) {
+    for ( auto ln : res.lines ) {
+        os << ln.first+1 << ": " << ln.second->c_str() << "\n";
+    }
+    return os;
+}
+
+namespace Nam {
+
+    inline void fooBar() {}
+}
+
+void runQueries(std::ifstream &&infile) {
+    TextQuery tq(std::move(infile));
+    while(true) {
+        std::cout << "enter word to look for, or q to quit:\n";
+        std::string s;
+        if (!(std::cin >> s) || s == "q") break;
+        print(std::cout, tq.query(s)) << std::endl;
+    }
+}
+
 void cppprimer_ch12::run() {
+    runQueries(std::ifstream("C:\\Users\\marci_000\\ClionProjects\\TestCpp1\\test.txt"));
+    return;
+
+    {
+        std::vector<std::string> vec = {"ALF", "B"};
+        std::string toSearch = "Alf";
+        auto itr = std::find_if(vec.begin(), vec.end(),
+                    [&](auto &s) {
+                        if ( s.size() != toSearch.size() )
+                            return false;
+                        for (size_t i = 0; i < s.size(); ++i)
+                            if (::tolower(s[i]) == ::tolower(toSearch[i]))
+                                return true;
+                        return false;
+                    }
+        );
+        if ( itr != vec.end()) {
+            std::cout << *itr << std::endl;
+        }
+    }
+    main2();
+
     int *pInt1 = new int;
     int *pInt2 = new int();
     std::cout << *pInt1 << std::endl;

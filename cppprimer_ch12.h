@@ -27,5 +27,10 @@ public:
     void run();
 };
 
+namespace Nam {
+
+    inline void fooBar();
+}
+
 
 #endif //TESTCPP1_CPPPRIMER_CH12_H
