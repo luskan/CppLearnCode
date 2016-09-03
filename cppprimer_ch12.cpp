@@ -20,6 +20,8 @@
 #include<type_traits>
 #include<boost/type_traits.hpp>
 
+namespace cppprimier_ch12 {
+
 class PimplTestImpl {
 
 };
@@ -32,26 +34,26 @@ PimplTest::~PimplTest() {
 }
 
 template<typename T>
-class has_not_equal{
-    template<typename U>
-    struct null_value{
-        static U& value;
-    };
+class has_not_equal {
+  template<typename U>
+  struct null_value {
+    static U &value;
+  };
 
-    template<typename U>
-    static std::true_type test(U*,decltype(null_value<U>::value!=null_value<U>::value)* = 0);
-    static std::false_type test(void*);
+  template<typename U>
+  static std::true_type test(U *, decltype(null_value<U>::value != null_value<U>::value) * = 0);
+  static std::false_type test(void *);
 
-public:
-    typedef decltype(test(static_cast<T*>(0))) type;
-    static const bool value = type::value;
+ public:
+  typedef decltype(test(static_cast<T *>(0))) type;
+  static const bool value = type::value;
 };
 
-struct sample1{
-    bool operator!=(const sample1&) { return true; }
+struct sample1 {
+  bool operator!=(const sample1 &) { return true; }
 };
 
-struct sample2{
+struct sample2 {
 };
 
 #include <algorithm>
@@ -61,24 +63,22 @@ struct sample2{
 
 #include <memory>
 
-class StrBlob{
-public:
-    typedef std::vector<std::string>::size_type size_type;
+class StrBlob {
+ public:
+  typedef std::vector<std::string>::size_type size_type;
 
-    StrBlob();
-    StrBlob(std::initializer_list<std::string> il);
-
-
+  StrBlob();
+  StrBlob(std::initializer_list<std::string> il);
 
 };
 
 struct TestMe {
 
-    int value;
-    virtual ~TestMe(){}
-    //TestMe() {
-    //    std::cout << "TestMe::TestMe" << std::endl;
-    //}
+  int value;
+  virtual ~TestMe() { }
+  //TestMe() {
+  //    std::cout << "TestMe::TestMe" << std::endl;
+  //}
 };
 
 int foo(int p) {
@@ -86,26 +86,25 @@ int foo(int p) {
 }
 
 class X {
-public:
-    X() {}
-    X(X*) {}
-    std::shared_ptr<X> iterator() const {
-        auto iter = std::make_shared<X>(new X);
-        return iter;
-    }
+ public:
+  X() { }
+  X(X *) { }
+  std::shared_ptr<X> iterator() const {
+      auto iter = std::make_shared<X>(new X);
+      return iter;
+  }
 };
 
 void freeMeDeallocator(int *p) {
     std::cout << "freeMeDeallocator" << std::endl;
 }
 
-template <typename T, size_t N>
-std::string ArrToStr( T (&t)[N] ) {
+template<typename T, size_t N>
+std::string ArrToStr(T (&t)[N]) {
     return std::string(std::cbegin(t), std::cend(t));
 }
 
-int main2()
-{
+int main2() {
 
     // std::string str2 = ARR_TO_STR("2+\0+2");
     std::string str2 = ArrToStr("2+2\0+2");
@@ -116,49 +115,49 @@ int main2()
 
 
 struct QueryResult {
-    std::vector<std::pair<int, std::shared_ptr<std::string>>> lines;
+  std::vector<std::pair<int, std::shared_ptr<std::string>>> lines;
 };
 
 class TextQuery {
-    std::vector<std::shared_ptr<std::string>> lines;
-    std::map<std::string, std::set<int>> index;
-public:
-    TextQuery(std::ifstream&& inf) {
-        std::string line;
-        while(std::getline(inf, line)) {
-            lines.push_back(std::make_shared<std::string>(line));
-            std::stringstream str(line);
-            std::string word;
-            while(str >> word) {
-                index[word].insert(lines.size()-1);
-            }
-        }
-    }
+  std::vector<std::shared_ptr<std::string>> lines;
+  std::map<std::string, std::set<int>> index;
+ public:
+  TextQuery(std::ifstream &&inf) {
+      std::string line;
+      while (std::getline(inf, line)) {
+          lines.push_back(std::make_shared<std::string>(line));
+          std::stringstream str(line);
+          std::string word;
+          while (str >> word) {
+              index[word].insert(lines.size() - 1);
+          }
+      }
+  }
 
-    QueryResult query(std::string& s) {
-        QueryResult qr;
-        const auto& lineInd = index[s];
-        for(auto num : lineInd)
-            qr.lines.push_back(std::make_pair(num, lines[num]));
-        return qr;
-    }
+  QueryResult query(std::string &s) {
+      QueryResult qr;
+      const auto &lineInd = index[s];
+      for (auto num : lineInd)
+          qr.lines.push_back(std::make_pair(num, lines[num]));
+      return qr;
+  }
 };
 
-std::ostream& print(std::ostream& os, const QueryResult& res) {
-    for ( auto ln : res.lines ) {
-        os << ln.first+1 << ": " << ln.second->c_str() << "\n";
+static std::ostream &print(std::ostream &os, const QueryResult &res) {
+    for (auto ln : res.lines) {
+        os << ln.first + 1 << ": " << ln.second->c_str() << "\n";
     }
     return os;
 }
 
 namespace Nam {
 
-    inline void fooBar() {}
+inline void fooBar() { }
 }
 
 void runQueries(std::ifstream &&infile) {
     TextQuery tq(std::move(infile));
-    while(true) {
+    while (true) {
         std::cout << "enter word to look for, or q to quit:\n";
         std::string s;
         if (!(std::cin >> s) || s == "q") break;
@@ -174,16 +173,16 @@ void cppprimer_ch12::run() {
         std::vector<std::string> vec = {"ALF", "B"};
         std::string toSearch = "Alf";
         auto itr = std::find_if(vec.begin(), vec.end(),
-                    [&](auto &s) {
-                        if ( s.size() != toSearch.size() )
-                            return false;
-                        for (size_t i = 0; i < s.size(); ++i)
-                            if (::tolower(s[i]) == ::tolower(toSearch[i]))
-                                return true;
-                        return false;
-                    }
+                                [&](auto &s) {
+                                  if (s.size() != toSearch.size())
+                                      return false;
+                                  for (size_t i = 0; i < s.size(); ++i)
+                                      if (::tolower(s[i]) == ::tolower(toSearch[i]))
+                                          return true;
+                                  return false;
+                                }
         );
-        if ( itr != vec.end()) {
+        if (itr != vec.end()) {
             std::cout << *itr << std::endl;
         }
     }
@@ -229,12 +228,12 @@ void cppprimer_ch12::run() {
     bit.push_back(0);
     bit.push_back(0);
     for (int n = 0; n < 8 * 13; ++n)
-        bit.push_back((n / 8 % 2)==0);
+        bit.push_back((n / 8 % 2) == 0);
 
     std::ofstream ofs("p:\\test.data", std::ifstream::binary);
-    for (auto it = bit.begin(); it != bit.end(); ) {
+    for (auto it = bit.begin(); it != bit.end();) {
         char toWrite = 0;
-        for (int n = 7; it!=bit.end() && n >= 0; --n, ++it) toWrite |= *it << n;
+        for (int n = 7; it != bit.end() && n >= 0; --n, ++it) toWrite |= *it << n;
         ofs.write(&toWrite, 1);
     }
     ofs.close();
@@ -242,18 +241,18 @@ void cppprimer_ch12::run() {
     // Read data
     std::vector<bool> bit2;
     union S {
-        struct {
-            unsigned short pad : 5;
-            unsigned short dat : 8;
-            unsigned short oth : 3;
-        };
-        char bytes[2];
+      struct {
+        unsigned short pad : 5;
+        unsigned short dat : 8;
+        unsigned short oth : 3;
+      };
+      char bytes[2];
     } data;
     bit2.push_back(0); // First three bits are padding
     bit2.push_back(0);
     bit2.push_back(0);
     std::ifstream ifs("p:\\test.data", std::ifstream::binary);
-    while(ifs.read(data.bytes, sizeof(data.bytes))) {
+    while (ifs.read(data.bytes, sizeof(data.bytes))) {
         std::swap(data.bytes[0], data.bytes[1]);
         std::cout << data.dat << std::endl;
         for (int n = 7; n >= 0; --n) bit2.push_back(data.dat & (1 << n));
@@ -297,7 +296,7 @@ Real data        012345670123456701234567012345670123456701234
     */
     struct
 
-    std::shared_ptr<int> spInt(new int(134), [](int *p) { std::cout << "free !" << std::endl; });
+        std::shared_ptr<int> spInt(new int(134), [](int *p) { std::cout << "free !" << std::endl; });
 
     std::unique_ptr<int, decltype(freeMeDeallocator) * > upInt(new int(123), freeMeDeallocator);
 
@@ -310,3 +309,5 @@ Real data        012345670123456701234567012345670123456701234
     vec.push_back(std::unique_ptr<int>(new int(4)));
     vec.erase(vec.begin());
 }
+
+} // namespace cppprimier_ch12 {

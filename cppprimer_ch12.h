@@ -7,30 +7,33 @@
 
 #include <memory>
 
+namespace cppprimier_ch12 {
+
 class PimplTestImpl;
 
 class PimplTest {
 
-    PimplTest();
+  PimplTest();
 
-    // Cannot be declared and defined here as it will use unique_ptr destructor which requires sizeof PimplTestImpl to be defined.
-    //~PimplTest(){}
+  // Cannot be declared and defined here as it will use unique_ptr destructor which requires sizeof PimplTestImpl to be defined.
+  //~PimplTest(){}
 
-    ~PimplTest();
+  ~PimplTest();
 
-private:
-    std::unique_ptr<PimplTestImpl> pimpl;
+ private:
+  std::unique_ptr<PimplTestImpl> pimpl;
 };
 
 class cppprimer_ch12 {
-public:
-    void run();
+ public:
+  void run();
 };
 
 namespace Nam {
 
-    inline void fooBar();
+inline void fooBar();
 }
 
+}
 
 #endif //TESTCPP1_CPPPRIMER_CH12_H

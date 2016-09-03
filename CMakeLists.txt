@@ -24,7 +24,7 @@ set(SOURCE_FILES
         #cppprimer_ch11.h
         cppprimer_ch12.cpp
         #cppprimer_ch12.h
-        functions.h cppprimer_ch13.cpp cppprimer_ch13.h vec.h)
+        functions.h cppprimer_ch13.cpp cppprimer_ch13.h vec.h Query.cpp Query.h cppprimer_ch15.cpp cppprimer_ch15.h cppprimer_ch16.cpp cppprimer_ch16.h cppprimer_ch17.cpp cppprimer_ch17.h)
 
 add_executable(TestCpp1 ${SOURCE_FILES})
 
